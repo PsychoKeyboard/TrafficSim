@@ -45,35 +45,38 @@ public class MyVehicle implements Vehicle {
 
     @Override
     public char asChar() {
-        // TODO Auto-generated method stub
-        return 0;
+        return model;
     }
 
     @Override
     public int currentSpeed() {
-        // TODO Auto-generated method stub
-        return 0;
+        return speed;
     }
 
     @Override
     public void decreaseSpeed(int by) {
-        // TODO Auto-generated method stub
-        
+        int calc = speed - by;
+
+        if(calc < 0)
+            speed = 0;
+        else
+            speed = calc;
     }
 
     @Override
     public int getPosition() {
-        // TODO Auto-generated method stub
-        return 0;
+        return position;
     }
 
     @Override
     public void increaseSpeed(int by) {
-        // TODO Auto-generated method stub
+        speed = speed + by;
         
     }
 
-    @Override
+    // move by speed to next position,
+    // if nervous then decrese speed and move by that speed
+    // if about to collide then move right behind the vehicle?
     public void move() {
         // TODO Auto-generated method stub
         
