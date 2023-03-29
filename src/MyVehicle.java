@@ -7,6 +7,8 @@ public class MyVehicle implements Vehicle {
     private int speed;
     private boolean isNervous;
 
+    private Vehicle next;
+
     public MyVehicle(){
 
         //check if its a nervous driver
@@ -41,6 +43,8 @@ public class MyVehicle implements Vehicle {
         //position & speed is initially 0
         position = 0;
         speed = 0;
+
+        this.next = null;
     }
 
     @Override
@@ -74,25 +78,63 @@ public class MyVehicle implements Vehicle {
         
     }
 
+
+    @Override
+    public boolean willCrashWithOnMove(Vehicle other) {
+
+        boolean flag = false;
+        
+        int otherPos = other.getPosition();
+
+        int newPos = position + speed;
+
+        if(newPos > otherPos){
+            flag = true;
+        }
+
+        return flag;
+    }
+
     // move by speed to next position,
     // if nervous then decrese speed and move by that speed
     // if about to collide then move right behind the vehicle?
     public void move() {
-        // TODO Auto-generated method stub
+
+
+        // not implementing nervous behaviour right now
+        // just a simple move method right now. Not checking collisions here
         
+        position = position + speed;
+
+
     }
 
     @Override
     public boolean nervous() {
-        // TODO Auto-generated method stub
-        return false;
+        
+        //current state is represented by isNervous
+
+        boolean slowDown = false;
+
+        //slow down randomly if nervous
+
+        if(isNervous){
+            //not implemeting the actual slowing right now
+            slowDown = true;
+        }
+
+        //slow down if about to crash
+
+        if(willCrashWithOnMove(next)){
+            // not implementing the actual slowing right now
+            //position = next.getPosition() - 1;
+            //speed = 0;
+            slowDown = true;
+        }
+        return slowDown;
     }
 
-    @Override
-    public boolean willCrashWithOnMove(Vehicle other) {
-        // TODO Auto-generated method stub
-        return false;
-    }
+    
 
     @Override
     public String toString() {
